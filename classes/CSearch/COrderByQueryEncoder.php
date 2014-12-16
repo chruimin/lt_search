@@ -22,6 +22,23 @@ class COrderByQueryEncoder
      */
     public function encode($data)
     {
+        if(is_string($data)) {
+            $data = [$data];
+        }
 
+        if(is_array($data)) {
+            foreach($data as $key=>$value) {
+                if(is_int($key)) {
+                    $this->_query->orderBy($value);
+                } else {
+                    if ($value != 'desc') {
+                        $value = 'asc';
+                    }
+                    $this->_query->orderBy($key, $value);
+                }
+            }
+        }
+
+        return $this->_query;
     }
 }
