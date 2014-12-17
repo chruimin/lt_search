@@ -49,24 +49,14 @@ class CSearch
      * 执行搜索
      *
      * @param array $data 表单数据
-     * @param $orderBy 排序规则数据，可接受如下几种传入数据
-     * $data = "created_at"; // 按created_at排序，正序
-     * $data = ["created_at"]; // 按created_at排序，正序
-     * $data = ["created_at"=>"asc"]; // 按created_at排序，正序
-     * $data = ["created_at"=>"desc"]; // 按created_at排序，倒序
-     * $data = ["category"=>"asc", "created_at"=>"desc"]; // 按category正向排序，在category相同的情况下按created_at排倒序
      * @param int $pageSize 返回列表的单页展现数
      *
      * @return array 搜索结果
      */
-    public function run(array $data, $orderBy=null, $pageSize=20)
+    public function run(array $data, $pageSize=20)
     {
         foreach($data as $key=>$value) {
             $this->_runDataParse($key, $value);
-        }
-
-        if(orderBy!=null) {
-            $this->_query = (new COrderByQueryEncoder($this->_query))->encode($orderBy);
         }
 
         return $this->_query->paginate($pageSize);
