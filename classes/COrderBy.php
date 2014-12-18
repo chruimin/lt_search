@@ -1,6 +1,6 @@
 <?php
 
-class COrderByQueryEncoder
+class COrderBy
 {
     protected $_query;
 
