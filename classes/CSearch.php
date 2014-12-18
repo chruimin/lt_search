@@ -24,7 +24,7 @@ class CSearch
 
     /**
      * 使用方法:
-     * $list = (new CSearch($query, $enableOnSearch))->run($data);
+     * $query = (new CSearch($query, $enableOnSearch))->query($data);
      *
      * @param Query $query
      * @param array $enableOnSearch 各个字段被允许搜索的能力,包含精确搜索(equal)、模糊搜索(like)、范围搜索(between)
@@ -49,17 +49,16 @@ class CSearch
      * 执行搜索
      *
      * @param array $data 表单数据
-     * @param int $pageSize 返回列表的单页展现数
      *
-     * @return array 搜索结果
+     * @return Query 组合完数据的Query对象 
      */
-    public function run(array $data, $pageSize=20)
+    public function query(array $data)
     {
         foreach($data as $key=>$value) {
             $this->_runDataParse($key, $value);
         }
 
-        return $this->_query->paginate($pageSize);
+        return $this->_query;
     }
 
     /**
