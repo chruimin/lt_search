@@ -72,7 +72,10 @@ class CSearch
     private function _runDataParse($key, $value)
     {
         if(is_array($value)) {
-            if(in_array($key, $this->_enables['between'])) {
+            if(in_array($key, $this->_enables['equal'])) {
+                // IN搜索（应该算是多个精确搜索的组合）
+                $this->_query = (new CInQueryEncoder($this->_query))->encode($key, $value);
+            } elseif(in_array($key, $this->_enables['between'])) {
                 // 范围搜索
                 $this->_query = (new CBetweenQueryEncoder($this->_query))->encode($key, $value);
             }
