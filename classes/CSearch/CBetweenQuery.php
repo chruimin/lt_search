@@ -1,6 +1,6 @@
 <?php
 
-class CLikeQueryEncoder extends ABaseQueryEncoder implements ISearchQueryEncoder
+class CBetweenQuery extends ABaseQuery implements ISearchQuery
 {
 
     /**
@@ -13,6 +13,6 @@ class CLikeQueryEncoder extends ABaseQueryEncoder implements ISearchQueryEncoder
      */
     public function encode($key, $value)
     {
-        return $this->_query->where($key, 'like', '%' . $value . '%');
+        return $this->_query->whereBetween($key, $value);
     }
 }

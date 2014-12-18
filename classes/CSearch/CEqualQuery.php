@@ -1,6 +1,6 @@
 <?php
 
-class CEqualQueryEncoder extends ABaseQueryEncoder implements ISearchQueryEncoder
+class CEqualQuery extends ABaseQuery implements ISearchQuery
 {
 
     /**
@@ -13,6 +13,6 @@ class CEqualQueryEncoder extends ABaseQueryEncoder implements ISearchQueryEncode
      */
     public function encode($key, $value)
     {
-        return $this->_query->whereIn($key, $value);
+        return $this->_query->where($key, $value);
     }
 }

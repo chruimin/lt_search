@@ -1,7 +1,8 @@
 <?php
 
-interface ISearchQueryEncoder
+class CEqualQuery extends ABaseQuery implements ISearchQuery
 {
+
     /**
      * 将传入的key、value数据，编码到query中并返回
      *
@@ -10,5 +11,8 @@ interface ISearchQueryEncoder
      *
      * @return Query
      */
-    public function encode($key, $value);
+    public function encode($key, $value)
+    {
+        return $this->_query->whereIn($key, $value);
+    }
 }

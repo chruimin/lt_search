@@ -1,6 +1,6 @@
 <?php
 
-abstract class ABaseQueryEncoder implements ISearchQueryEncoder
+abstract class ABaseQuery implements ISearchQuery
 {
     protected $_query;
 

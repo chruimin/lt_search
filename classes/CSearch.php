@@ -28,7 +28,7 @@ class CSearch
      *
      * @param Query $query
      * @param array $enableOnSearch 各个字段被允许搜索的能力,包含精确搜索(equal)、模糊搜索(like)、范围搜索(between)
-     * 可接受格式例子：(like和equal只能接受一个，如果都传进来了，默认是equal)
+     * 可接受格式例子：(如果一个字段传入的能力有多个，则能力优先级equal>like>between)
      * 子数组只有一个元素就表示，这个元素中所有字段都能用任意方式进行搜索
      * 子数组有两个元素表示，第一个元素中的所有字段都能用第二个元素中的方式进行搜索
      * 用数组或者带逗号分隔的字符串来表示多个
@@ -74,17 +74,17 @@ class CSearch
         if(is_array($value)) {
             if(in_array($key, $this->_enables['equal'])) {
                 // IN搜索（应该算是多个精确搜索的组合）
-                $this->_query = (new CInQueryEncoder($this->_query))->encode($key, $value);
+                $this->_query = (new CInQuery($this->_query))->encode($key, $value);
             } elseif(in_array($key, $this->_enables['between'])) {
                 // 范围搜索
-                $this->_query = (new CBetweenQueryEncoder($this->_query))->encode($key, $value);
+                $this->_query = (new CBetweenQuery($this->_query))->encode($key, $value);
             }
         } elseif(in_array($key, $this->_enables['equal'])) {
             // 精确搜索
-            $this->_query = (new CEqualQueryEncoder($this->_query))->encode($key, $value);
+            $this->_query = (new CEqualQuery($this->_query))->encode($key, $value);
         } elseif(in_array($key, $this->_enables['like'])) {
             // 模糊搜索
-            $this->_query = (new CLikeQueryEncoder($this->_query))->encode($key, $value);
+            $this->_query = (new CLikeQuery($this->_query))->encode($key, $value);
         }
     }
 
