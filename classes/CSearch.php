@@ -127,7 +127,7 @@ class CSearch
      */
     private function _beforeEnableOnSearchArrayParse(array $enableOnSearch)
     {
-        for($i=0; $i<count($enableOnSearch); i++) {
+        for($i=0; $i<count($enableOnSearch); $i++) {
             for($j=0; $j<count($enableOnSearch[$i]); $j++) {
                 $enableOnSearch[$i][$j] = $this->_stringToArray($enableOnSearch[$i][$j]);
             }
@@ -162,7 +162,7 @@ class CSearch
      */ 
     private function _stringToArray($values)
     {
-        if (is_string($value)) {
+        if (is_string($values)) {
             $values = explode(',', $values);
         }
 
