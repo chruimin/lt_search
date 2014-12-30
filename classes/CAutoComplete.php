@@ -20,7 +20,7 @@ class CAutoComplete
      * @param int $pageSize 返回结果的个数
      * @param string $primaryKey primary_key字段名称
      *
-     * @return Query 组装后的query
+     * @return string 返回结果的json串
      * @author 
      **/
     public function execute($query, $enableOnSearch, $data, $valueField, $pageSize=5, $primaryKey='id')
@@ -43,7 +43,7 @@ class CAutoComplete
      * @param string $valueField value字段
      * @param int $pageSize 返回结果的个数
      *
-     * @return Query 组装后的query
+     * @return string 返回结果的json串
      * @author 
      **/
     public function executeByModel($model, $data, $valueField, $pageSize=5)
